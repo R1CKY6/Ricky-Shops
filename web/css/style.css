@@ -1,0 +1,64 @@
+@font-face {
+    font-family: 'Main Font';
+    src: url(../fonts/font.otf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    font-family: 'Main Font';
+    color: white;
+    font-style: normal;
+    font-weight: 600;
+    /* letter-spacing: 0.11em; */
+    overflow: hidden;
+}
+
+
+#app {
+    display: none;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-image: url('../img/photo1.png');
+    background-repeat: no-repeat;
+    background: radial-gradient(63.56% 152.1% at 51.88% 65.97%, #000000 0%, rgba(0, 0, 0, 0.9) 100%);
+}
+
+
+#item:nth-child(4n) {
+    margin-right: 0;
+}
+
+/* #item:nth-last-child(-n+4) {
+    margin-bottom: 0;
+} */
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+input:focus {
+    outline: none;
+}
+
+@keyframes buttonAnimation {
+    0% {
+        transform: translateY(-30vh);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+.buttonAnimation-enter-active {
+    animation: buttonAnimation 1s ease-in-out;
+}
+
+.buttonAnimation-leave-active {
+    animation: buttonAnimation 1s ease-in-out reverse;
+}

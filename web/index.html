@@ -1,0 +1,100 @@
+<html>
+    <head>
+        <title></title>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <link rel="stylesheet" href="./css/style.css">
+    </head>
+    <body>
+
+        <div id="app">
+            <div class="h-full w-full flex items-center justify-center">
+                <img class="h-[74%]" src="./img/container.png" alt="">
+                
+                <div class="absolute h-[74%] w-[73%] flex justify-center">
+
+                    <!-- Search Product -->
+                    <div class="h-[5.6%] w-[24.9%] border-[1px] absolute left-[31.8%] top-[4.2%] rounded-[10px] bg-[#d8d8d80d] border-[#464646]">
+                        <input v-model="searchProduct" type="text" class="h-full w-full bg-[transparent] text-[16px] p-[1vh]" :placeholder="locales.search_product">
+                    </div>
+
+                    <!-- Container Products  -->
+                    <div class="h-[56%] w-[63.2%] absolute top-[15.1%] left-[1.3%] overflow-y-auto">
+                        <div id="item" v-for="v in filterProduct()" class="inline-block h-[42.4%] w-[21.4%] relative mr-[4.8%] mb-[7.6%]">
+                            <div class="absolute h-full w-full flex items-center justify-center">
+                                <div :style="'color : '+getColorSettings(v.type).text" class="absolute top-[1%]">{{v.label}} - {{v.price}}$</div>
+                                <img class="h-[55%]" :src="'./itemImage/'+v.img" alt="">
+                                <div @click="addToBasket(v)" class="bottom-[3.5%] absolute h-[15%] w-[64%] flex items-center justify-center cursor-pointer">
+                                    <div :style="'color : '+getColorSettings(v.type).text">{{locales.add}}</div>
+                                </div>
+
+                            </div>
+                            <img :src="'./img/'+v.type+'.png'" alt="">
+                        </div>
+                    </div>
+
+
+                    <!-- Basket Menu -->
+                    <div style="background: linear-gradient(180deg, rgba(37, 144, 20, 0.30) 0%, rgba(0, 0, 0, 0.00) 179.71%), rgba(216, 216, 216, 0.05);" class="absolute top-[5.9%] h-[64.5%] w-[22.9%] right-[2.7%] border-[1px] border-[#259014] rounded-[5px]">
+                        <div class="h-[11%] w-full border-b-[1px] border-b-[#259014] flex items-center justify-center text-center">
+                            <span class="text-[20px]">{{locales.basket}}<br><span class="text-[14px] text-[#727272]">{{locales.total_price}}: {{totalPrice}}$</span></span>
+                        </div>
+                        <div class="h-[89%] w-full absolute flex items-center justify-center">
+                            <div class="absolute top-[8.4%] w-[94.9%] h-[84.1%]">
+                                <div v-for="(v,k) in basket" class="h-[12.4%] w-full mb-[6.7%] relative">
+
+                                    <div class="h-full w-full absolute flex items-center justify-center">
+                                        <span :style="'color : '+getColorSettings(v.type).text" class="absolute left-[1%]">{{v.label}}<br><span style="color: #D3D3D3">Price : {{getPriceItemInBasket(v.label)}}$</span></span>
+                                        
+                                        <div @click="removeOneProduct(v)" class="absolute right-[5.1%] h-[55%] rounded-full w-[9%] cursor-pointer"></div>
+                                        <div class="h-[60%] w-[13%] absolute right-[17%] flex items-center justify-center text-[20px]">
+                                            <div>{{v.quantity}}</div>
+                                        </div>
+                                        <div @click="addOneProduct(v)" class="absolute right-[33.1%] h-[55%] rounded-full w-[9%] cursor-pointer"></div>
+                                    </div>
+
+                                    <img :src="'./img/basket_'+v.type+'.png'" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="absolute w-[22.9%] bottom-[9.2%] right-[2.7%] h-[18%] flex items-start justify-center">
+                        <div @click="removeAllProducts()" class="h-[36.8%] w-[57%] cursor-pointer absolute">
+                            <div class="absolute h-full w-full flex items-center justify-center">
+                                <div>{{locales.remove_all}}</div>
+                            </div>
+                            <img src="./img/removeall.png" alt="">
+                        </div>
+
+                        <transition name="buttonAnimation">
+                            <div v-if="playerMoney >= totalPrice" @click="buy()" class="h-[36.8%] w-[57%] absolute bottom-[0%] cursor-pointer absolute">
+                                <div class="absolute h-full w-full flex items-center justify-center">
+                                    <div>{{locales.buy}}</div>
+                                </div>
+                                <img src="./img/buy.png" alt="">
+                            </div>
+                        </transition>
+
+                        <transition name="buttonAnimation">
+                            <div v-if="playerMoney < totalPrice" class="h-[36.8%] w-[57%] absolute bottom-[0%] cursor-pointer absolute">
+                                <div class="absolute h-full w-full flex items-center justify-center">
+                                    <div>{{locales.no_money}}</div>
+                                </div>
+                                <img src="./img/nomoney.png" alt="">
+                            </div>
+                        </transition>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        
+
+        <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
+        <script src='https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js'></script>
+        <script src="./js/script.js"></script>
+        <script src='https://cdn.tailwindcss.com'></script>
+    </body>
+</html>
