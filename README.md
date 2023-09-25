@@ -20,7 +20,7 @@
 3. Add `ensure Shops` in your server.cfg
 4. Start the server.
 
-[Forum CFX](https://forum.cfx.re/t/release-free-esx-qbcore-advanced-job-center/5163694)
+[Forum CFX](https://forum.cfx.re/t/release-free-esx-qbcore-advanced-shop-system/5171962)
 
 # Free Support
 [Discord](https://discord.gg/tHAbhd94vS)
